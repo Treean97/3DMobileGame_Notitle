@@ -124,7 +124,7 @@ public class ObjectShooter : MonoBehaviour
                        + _AdditionalForceManager.GetAdditionalForceVector;
         tRig.AddForce(tForce, ForceMode.Impulse);
 
-        _ShootForce = 0f;
+        _ShootForce = 0;
         _CanShoot = false;
         _CurShootDelay = 0;
 

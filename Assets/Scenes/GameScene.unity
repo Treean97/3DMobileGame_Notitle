@@ -2327,13 +2327,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ShooterTF: {fileID: 863021335}
-  _ShootForce: 15
+  _ShootForce: 0
   _PowerScale: 15
-  _MaxShootForce: 15
-  _MinShootForce: 5
+  _MaxShootForce: 20
+  _MinShootForce: 15
   _UpwardForce: 5
-  _MaxTorqueForce: 3
-  _MinTorqueForce: 10
+  _MaxTorqueForce: 10
+  _MinTorqueForce: 3
   _AdditionalForceManager: {fileID: 2059992275}
   _MaxShootDelay: 2
   _ShootObjects:
@@ -3275,7 +3275,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 770803362}
@@ -4920,7 +4920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AdditionalForceUI: {fileID: 266072210}
-  _MaxRandomForceRange: 3
+  _MaxRandomForceRange: 5
 --- !u!4 &2059992276
 Transform:
   m_ObjectHideFlags: 0

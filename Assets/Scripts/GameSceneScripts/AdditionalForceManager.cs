@@ -11,6 +11,9 @@ public class AdditionalForceManager : MonoBehaviour
     float _MaxRandomForceRange;   // 랜덤 값 범위  
 
     float _AdditionalForce = 0;
+    float _MinAdditionalForce = 0;
+
+
     Vector3 _AdditonalForceVector = Vector3.zero;
     public Vector3 GetAdditionalForceVector
     {
@@ -73,7 +76,7 @@ public class AdditionalForceManager : MonoBehaviour
         if (tRandomInt != 0)
         {
             // 랜덤 힘 크기 추출
-            tRandomfloat = Random.Range(0.1f, _MaxRandomForceRange);
+            tRandomfloat = Random.Range(_MinAdditionalForce, _MaxRandomForceRange);
             // 소숫점 1자리까지 남기고 버림
             _AdditionalForce = Mathf.Floor(tRandomfloat * 10f) / 10f;
         }     

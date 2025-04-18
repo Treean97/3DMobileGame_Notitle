@@ -16,6 +16,6 @@ public class GameSceneNextObjectsUI : MonoBehaviour
             _SlotImages[i].sprite = tArray[i].ShootObjectsData.GetShootObjectSpriteOnUI;
         }
 
-        Debug.Log("큐 업데이트");
+        
     }
 }

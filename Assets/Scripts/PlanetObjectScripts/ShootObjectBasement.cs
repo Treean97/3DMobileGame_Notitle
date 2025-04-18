@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootObjectBasement : MonoBehaviour
@@ -12,16 +13,34 @@ public class ShootObjectBasement : MonoBehaviour
     bool _IsStable = false;
     public bool GetIsStable {  get { return _IsStable; } }
 
+    private MeshCollider _MeshCollider;
+
+    private void Awake()
+    {
+
+        _MeshCollider = GetComponent<MeshCollider>();
+
+    }
+    
+    
     private void Start()
     {
-        // transform.localScale = _ShootObjectData.GetShootObjectScale;
-        
+
     }
     
     // 풀에서 재생성 시 다시 IsStable = false;
     private void OnEnable()
     {
         _IsStable = false;
+
+        StartCoroutine(TriggerOnOff());
+    }
+
+    private void OnDisable()
+    {
+        // 꺼질 때 반드시 트리거 켜두기
+        _MeshCollider.isTrigger = true;
+        StopAllCoroutines();
     }
 
     // Update is called once per frame
@@ -29,6 +48,16 @@ public class ShootObjectBasement : MonoBehaviour
     {
         
     }
+
+    private IEnumerator TriggerOnOff()
+    {        
+        _MeshCollider.isTrigger = true;
+
+        yield return null;
+
+        _MeshCollider.isTrigger = false;
+    }
+
 
     // 충돌 체크
     // 1. 나와 같은 ID인지

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CustomGravity : MonoBehaviour
 {
-    public Vector3 _GravityPointTF = Vector3.zero;  // �߷��� �߽���
-    public float _GravityForce = 10f; // �߷��� ũ��
-    public float _Damping = 1f;
+    public Vector3 _GravityPointTF = Vector3.zero; 
+    public float _GravityForce = 10f;
+    public float _Damping;  // 가중치
 
     private Rigidbody _Rig;
 
@@ -19,13 +19,13 @@ public class CustomGravity : MonoBehaviour
     {
         if (_GravityPointTF != null && _Rig != null)
         {
-            // �߷� �߽������� ������Ʈ������ ����
+            
             Vector3 tDirectionToCenter = _GravityPointTF - transform.position;
 
-            // �߷� �������� ���� ����
+            
             _Rig.AddForce(tDirectionToCenter.normalized * _GravityForce);
 
-            // ���� ȿ�� ���� (�߽ɿ� ����������� ���߱� ����)
+            
             _Rig.linearVelocity *= 1f - (_Damping * Time.fixedDeltaTime);
         }
     }

@@ -21,7 +21,7 @@ jobs:
 
       # Step2 - Cache Library
       - name: Cache Library
-        uses: actions/cache@v4.0.2
+        uses: actions/cache@v3
         with: 
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -40,7 +40,7 @@ jobs:
       
       # Step4 - Upload Build File
       - name: Upload Build File
-      - uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Build-Android
           path: build

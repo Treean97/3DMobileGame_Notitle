@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
 
 permissions: write-all
-
+  
 jobs:
-  buildForAndroid:
-    name: Build Android 🛸🛸🛸
+  #Job 설정
+  buildForAndroid: 
+    name: Build Android
     runs-on: ubuntu-latest
-
     steps:
+
       # Step1 - Check Out
       - name: Check Out
         uses: actions/checkout@v4
@@ -21,36 +22,25 @@ jobs:
       # Step2 - Cache Library
       - name: Cache Library
         uses: actions/cache@v3
-        with:
+        with: 
           path: Library
-          key: Library-${{ hashFiles('Assets/**','Packages/**','ProjectSettings/**') }}
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
 
-      # Step3 - Activate Unity License
-      - name: Activate Unity License
-        uses: game-ci/unity-activate@v2
-        with:
-          unityVersion: ${{ secrets.UNITY_VERSION }}
-        env:
-          UNITY_LICENSE:  ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL:    ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-
-      # Step4 - Unity Build
+      # Step3 - Unity Build
       - name: Unity Build
         uses: game-ci/unity-builder@v4
         env:
-          UNITY_EMAIL:    ${{ secrets.UNITY_EMAIL }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: Android
-          buildPath:      build/Android
-          buildName:      MyGame.apk
-
-      # Step5 - Upload Build File
+      
+      # Step4 - Upload Build File
       - name: Upload Build File
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v
         with:
           name: Build-Android
-          path: build/Android
+          path: build

@@ -8,7 +8,7 @@ permissions: write-all
 jobs:
   #Job 설정
   buildForAndroid: 
-    name: Build Android
+    name: Build Android🛸🛸🛸
     runs-on: ubuntu-latest
     steps:
 
@@ -21,7 +21,7 @@ jobs:
 
       # Step2 - Cache Library
       - name: Cache Library
-        uses: actions/cache@v3
+        uses: actions/cache@v4.0.2
         with: 
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -40,7 +40,7 @@ jobs:
       
       # Step4 - Upload Build File
       - name: Upload Build File
-      - uses: actions/upload-artifact@v
+      - uses: actions/upload-artifact@v3
         with:
           name: Build-Android
           path: build

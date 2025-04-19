@@ -1,0 +1,53 @@
+name: UnityBuildTest
+
+on:
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  buildForAndroid:
+    name: Build Android 🛸🛸🛸
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step1 - Check Out
+      - name: Check Out
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      # Step2 - Cache Library
+      - name: Cache Library
+        uses: actions/cache@v4.0.2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**','Packages/**','ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Step3 - Activate Unity License
+      - name: Activate Unity License
+        uses: game-ci/unity-activate@v2
+        with:
+          unityVersion: ${{ secrets.UNITY_VERSION }}
+          license:       ${{ secrets.UNITY_LICENSE }}
+
+      # Step4 - Unity Build
+      - name: Unity Build
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_EMAIL:    ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: Android
+          buildPath:      build/Android
+          buildName:      MyGame.apk
+
+      # Step5 - Upload Build File
+      - name: Upload Build File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build-Android
+          path: build/Android
